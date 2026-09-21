@@ -3,22 +3,307 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trang web của tôi</title>
+  <title>Mô phỏng não ruồi</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-      background-color: #f2f2f2;
+      background: linear-gradient(135deg, #dff6ff, #f5fff0);
+      color: #17324d;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 850px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
     h1 {
-      color: #2563eb;
+      margin-top: 0;
+      color: #176b87;
+      text-align: center;
+    }
+
+    .intro {
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    label {
+      display: block;
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    select,
+    input[type="range"] {
+      width: 100%;
+    }
+
+    select {
+      padding: 12px;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    input[type="range"] {
+      accent-color: #168aad;
+      cursor: pointer;
+    }
+
+    .value {
+      color: #168aad;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 22px;
+      background: #f1fbff;
+      border-radius: 14px;
+      border-left: 6px solid #168aad;
+    }
+
+    .result h2 {
+      margin-top: 0;
+      color: #176b87;
+    }
+
+    .metric {
+      margin: 18px 0;
+    }
+
+    .metric-title {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .bar {
+      width: 100%;
+      height: 18px;
+      background: #dce5e8;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 20px;
+      transition: width 0.3s ease;
+    }
+
+    #survivalBar {
+      background: #38a169;
+    }
+
+    #movementBar {
+      background: #3182ce;
+    }
+
+    #stressBar {
+      background: #e53e3e;
+    }
+
+    .reaction {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff8db;
+      border-radius: 10px;
+      line-height: 1.6;
+    }
+
+    .warning {
+      margin-top: 25px;
+      padding: 14px;
+      background: #fff3cd;
+      border: 1px solid #ffda6a;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #607d8b;
+      font-size: 13px;
     }
   </style>
 </head>
+
 <body>
-  <h1>Xin chào!</h1>
-  <p>Đây là trang web đầu tiên của tôi trên GitHub.</p>
+  <main class="container">
+    <h1>🧠 Mô phỏng não ruồi</h1>
+
+    <p class="intro">
+      Mô phỏng này dùng các chỉ số giả lập để minh họa cách
+      chất lượng nước có thể ảnh hưởng đến hoạt động của ruồi giấm.
+    </p>
+
+    <label for="waterType">Chọn loại nước:</label>
+
+    <select id="waterType">
+      <option value="clean">Nước sạch</option>
+      <option value="waste">Nước có rác thải</option>
+    </select>
+
+    <label for="concentration">
+      Nồng độ rác thải:
+      <span id="concentrationValue" class="value">0%</span>
+    </label>
+
+    <input
+      id="concentration"
+      type="range"
+      min="0"
+      max="100"
+      value="0"
+    >
+
+    <section class="result">
+      <h2 id="resultTitle">Kết quả mô phỏng</h2>
+
+      <div class="metric">
+        <div class="metric-title">
+          <span>Khả năng sống sót</span>
+          <span id="survivalText">100%</span>
+        </div>
+        <div class="bar">
+          <div id="survivalBar" class="bar-fill"></div>
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-title">
+          <span>Hoạt động vận động</span>
+          <span id="movementText">100%</span>
+        </div>
+        <div class="bar">
+          <div id="movementBar" class="bar-fill"></div>
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-title">
+          <span>Mức căng thẳng thần kinh</span>
+          <span id="stressText">0%</span>
+        </div>
+        <div class="bar">
+          <div id="stressBar" class="bar-fill"></div>
+        </div>
+      </div>
+
+      <div class="reaction">
+        <strong>Phản ứng mô phỏng:</strong>
+        <span id="reactionText">
+          Điều kiện nước sạch, chưa ghi nhận ảnh hưởng đáng kể.
+        </span>
+      </div>
+    </section>
+
+    <div class="warning">
+      ⚠️ Đây chỉ là mô phỏng giáo dục bằng dữ liệu giả lập.
+      Kết quả không phải dữ liệu thí nghiệm thật và không thể dùng để kết luận
+      nước có độc hay không đối với người hoặc động vật.
+    </div>
+
+    <footer>
+      Fruit Fly Brain Simulation
+    </footer>
+  </main>
+
+  <script>
+    const waterType = document.getElementById("waterType");
+    const concentration = document.getElementById("concentration");
+    const concentrationValue = document.getElementById("concentrationValue");
+
+    const resultTitle = document.getElementById("resultTitle");
+    const survivalText = document.getElementById("survivalText");
+    const movementText = document.getElementById("movementText");
+    const stressText = document.getElementById("stressText");
+
+    const survivalBar = document.getElementById("survivalBar");
+    const movementBar = document.getElementById("movementBar");
+    const stressBar = document.getElementById("stressBar");
+    const reactionText = document.getElementById("reactionText");
+
+    function updateSimulation() {
+      const type = waterType.value;
+      let level = Number(concentration.value);
+
+      if (type === "clean") {
+        level = 0;
+        concentration.value = 0;
+      }
+
+      concentrationValue.textContent = level + "%";
+
+      let survival;
+      let movement;
+      let stress;
+
+      if (type === "clean") {
+        survival = 100;
+        movement = 100;
+        stress = 0;
+
+        resultTitle.textContent = "Kết quả: Nước sạch";
+        reactionText.textContent =
+          "Ruồi giấm hoạt động bình thường trong mô phỏng.";
+      } else {
+        survival = Math.max(20, 100 - level * 0.7);
+        movement = Math.max(10, 100 - level * 0.85);
+        stress = Math.min(100, level * 0.95);
+
+        resultTitle.textContent = "Kết quả: Nước có rác thải";
+
+        if (level === 0) {
+          reactionText.textContent =
+            "Chưa có nồng độ rác thải đáng kể trong mô phỏng.";
+        } else if (level < 30) {
+          reactionText.textContent =
+            "Có thể xuất hiện ảnh hưởng nhẹ đến vận động và mức căng thẳng thần kinh.";
+        } else if (level < 70) {
+          reactionText.textContent =
+            "Mô phỏng cho thấy hoạt động vận động giảm và căng thẳng thần kinh tăng.";
+        } else {
+          reactionText.textContent =
+            "Mô phỏng cho thấy ảnh hưởng mạnh: vận động giảm rõ rệt và tỷ lệ sống giảm.";
+        }
+      }
+
+      survival = Math.round(survival);
+      movement = Math.round(movement);
+      stress = Math.round(stress);
+
+      survivalText.textContent = survival + "%";
+      movementText.textContent = movement + "%";
+      stressText.textContent = stress + "%";
+
+      survivalBar.style.width = survival + "%";
+      movementBar.style.width = movement + "%";
+      stressBar.style.width = stress + "%";
+    }
+
+    waterType.addEventListener("change", updateSimulation);
+    concentration.addEventListener("input", updateSimulation);
+
+    updateSimulation();
+  </script>
 </body>
 </html>
