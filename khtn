@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fruit Fly Research Lab - 1998</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #008080;
+      color: #000;
+      font-family: "Times New Roman", serif;
+      font-size: 17px;
+    }
+
+    .page {
+      width: 92%;
+      max-width: 1050px;
+      margin: 18px auto;
+      background: #c0c0c0;
+      border: 4px outset #eeeeee;
+      padding: 8px;
+    }
+
+    .title {
+      background: #000080;
+      color: #ffff00;
+      padding: 12px;
+      border: 3px inset #eeeeee;
+      text-align: center;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 31px;
+      letter-spacing: 2px;
+    }
+
+    .blink {
+      color: #ff0000;
+      font-weight: bold;
+      text-align: center;
+      margin: 10px;
+    }
+
+    .menu {
+      background: #ffffff;
+      border: 3px inset #eeeeee;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .menu a {
+      color: #0000ee;
+      font-weight: bold;
+      margin: 0 12px;
+    }
+
+    .box {
+      background: #eeeeee;
+      border: 3px outset #ffffff;
+      padding: 12px;
+      margin-top: 12px;
+    }
+
+    .box h2 {
+      color: #000080;
+      background: #ffff00;
+      border: 2px solid #000000;
+      padding: 5px;
+      margin-top: 0;
+      font-size: 23px;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .fly-area {
+      background: #ffffff;
+      border: 3px inset #eeeeee;
+      text-align: center;
+      padding: 8px;
+    }
+
+    svg {
+      width: 100%;
+      max-width: 470px;
+      height: auto;
+      background: #fff;
+      border: 2px solid #000;
+    }
+
+    .part-button {
+      background: #c0c0c0;
+      border: 3px outset #ffffff;
+      padding: 7px 12px;
+      margin: 4px;
+      cursor: pointer;
+      font-family: "Times New Roman", serif;
+      font-weight: bold;
+    }
+
+    .part-button:active {
+      border-style: inset;
+    }
+
+    .info {
+      min-height: 70px;
+      background: #ffffcc;
+      border: 2px inset #ffffff;
+      padding: 8px;
+      margin-top: 8px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 10px 0 4px;
+    }
+
+    select,
+    input[type="range"] {
+      width: 100%;
+    }
+
+    select {
+      padding: 7px;
+      font-size: 16px;
+      border: 2px inset #ffffff;
+    }
+
+    input[type="range"] {
+      accent-color: #000080;
+    }
+
+    .number {
+      color: #000080;
+      font-weight: bold;
+      font-size: 21px;
+    }
+
+    .result {
+      background: #ffffff;
+      border: 3px inset #eeeeee;
+      padding: 10px;
+      margin-top: 12px;
+    }
+
+    .bar {
+      height: 20px;
+      background: #808080;
+      border: 2px inset #ffffff;
+      margin: 4px 0 10px;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0%;
+    }
+
+    #lifeBar {
+      background: #00aa00;
+    }
+
+    #moveBar {
+      background: #0000cc;
+    }
+
+    #stressBar {
+      background: #cc0000;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+    }
+
+    th,
+    td {
+      border: 2px solid #000000;
+      padding: 7px;
+      text-align: left;
+    }
+
+    th {
+      background: #000080;
+      color: #ffffff;
+    }
+
+    .warning {
+      background: #ffff00;
+      border: 2px solid #ff0000;
+      padding: 9px;
+      margin-top: 12px;
+      font-size: 15px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+      .columns {
+        grid-template-columns: 1fr;
+      }
+
+      .title h1 {
+        font-size: 23px;
+      }
+
+      .menu a {
+        display: block;
+        margin: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="title">
+      <h1>FRUIT FLY RESEARCH LAB</h1>
+      <p>Est. 1998 - Drosophila melanogaster Online Database</p>
+    </header>
+
+    <div class="blink">
+      *** WELCOME TO MY 90s SCIENCE HOMEPAGE ***
+    </div>
+
+    <nav class="menu">
+      <a href="#anatomy">Anatomy</a>
+      <a href="#simulation">Simulation</a>
+      <a href="#notes">Research Notes</a>
+    </nav>
+
+    <section class="box" id="anatomy">
+      <h2>1. CẤU TRÚC RUỒI GIẤM ĐỰC</h2>
+
+      <div class="columns">
+        <div class="fly-area">
+          <h3>Male Drosophila Diagram</h3>
+
+          <svg viewBox="0 0 600 360" role="img" aria-label="Sơ đồ ruồi giấm đực">
+            <!-- cánh -->
+            <ellipse cx="335" cy="120" rx="145" ry="42"
+                     fill="#d9f2ff" stroke="#000080" stroke-width="4"
+                     transform="rotate(-18 335 120)"/>
+            <ellipse cx="335" cy="235" rx="145" ry="42"
+                     fill="#d9f2ff" stroke="#000080" stroke-width="4"
+                     transform="rotate(18 335 235)"/>
+
+            <!-- chân -->
+            <g stroke="#000" stroke-width="4" fill="none">
+              <path d="M270 150 L190 95 L120 90"/>
+              <path d="M285 175 L185 175 L105 145"/>
+              <path d="M280 205 L180 250 L105 280"/>
+              <path d="M330 150 L410 95 L500 80"/>
+              <path d="M340 180 L445 170 L530 145"/>
+              <path d="M335 210 L430 255 L515 285"/>
+            </g>
+
+            <!-- thân -->
+            <ellipse cx="285" cy="180" rx="125" ry="73"
+                     fill="#8b4513" stroke="#000" stroke-width="5"/>
+
+            <!-- vạch bụng -->
+            <g stroke="#000" stroke-width="5">
+              <line x1="220" y1="125" x2="220" y2="235"/>
+              <line x1="250" y1="115" x2="250" y2="245"/>
+              <line x1="280" y1="108" x2="280" y2="252"/>
+              <line x1="310" y1="108" x2="310" y2="252"/>
+              <line x1="340" y1="113" x2="340" y2="247"/>
+              <line x1="370" y1="125" x2="370" y2="235"/>
+            </g>
+
+            <!-- đầu -->
+            <circle cx="145" cy="180" r="62"
+                    fill="#5b2d0c" stroke="#000" stroke-width="5"/>
+
+            <!-- mắt -->
+            <circle cx="115" cy="155" r="25"
+                    fill="#cc0000" stroke="#000" stroke-width="3"/>
+            <circle cx="115" cy="205" r="25"
+                    fill="#cc0000" stroke="#000" stroke-width="3"/>
+
+            <!-- râu -->
+            <path d="M105 135 Q65 95 40 110"
+                  stroke="#000" stroke-width="4" fill="none"/>
+            <path d="M105 225 Q65 265 40 250"
+                  stroke="#000" stroke-width="4" fill="none"/>
+
+            <!-- nhãn -->
+            <g font-family="Arial" font-size="18" fill="#000">
+              <text x="20" y="35">Antenna</text>
+              <line x1="80" y1="40" x2="95" y2="115" stroke="#000"/>
+
+              <text x="18" y="330">Compound eye</text>
+              <line x1="100" y1="315" x2="115" y2="220" stroke="#000"/>
+
+              <text x="395" y="35">Wing</text>
+              <line x1="425" y1="42" x2="385" y2="100" stroke="#000"/>
+
+              <text x="430" y="330">Abdomen</text>
+              <line x1="455" y1="315" x2="340" y2="245" stroke="#000"/>
+
+              <text x="245" y="285">Thorax</text>
+              <line x1="275" y1="275" x2="285" y2="235" stroke="#000"/>
+
+              <text x="455" y="115">Leg</text>
+              <line x1="455" y1="120" x2="415" y2="145" stroke="#000"/>
+            </g>
+          </svg>
+
+          <div>
+            <button class="part-button" onclick="showPart('head')">Head</button>
+            <button class="part-button" onclick="showPart('thorax')">Thorax</button>
+            <button class="part-button" onclick="showPart('abdomen')">Abdomen</button>
+            <button class="part-button" onclick="showPart('wing')">Wing</button>
+            <button class="part-button" onclick="showPart('eye')">Compound eye</button>
+          </div>
+
+          <div class="info" id="partInfo">
+            Chọn một bộ phận để xem thông tin.
+          </div>
+        </div>
+
+        <div>
+          <h3>Thông tin cơ bản</h3>
+          <table>
+            <tr>
+              <th>Bộ phận</th>
+              <th>Chức năng</th>
+            </tr>
+            <tr>
+              <td>Head</td>
+              <td>Chứa não, mắt kép và râu cảm giác.</td>
+            </tr>
+            <tr>
+              <td>Thorax</td>
+              <td>Gắn cánh và các cơ vận động.</td>
+            </tr>
+            <tr>
+              <td>Abdomen</td>
+              <td>Chứa nhiều cơ quan bên trong.</td>
+            </tr>
+            <tr>
+              <td>Compound eye</td>
+              <td>Giúp ruồi nhận biết ánh sáng và chuyển động.</td>
+            </tr>
+            <tr>
+              <td>Wing</td>
+              <td>Giúp ruồi bay và giữ thăng bằng.</td>
+            </tr>
+          </table>
+
+          <p>
+            Ruồi giấm đực thường có phần bụng sẫm màu hơn so với con cái.
+            Hình trên là sơ đồ minh họa, không phải ảnh kính hiển vi thực tế.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="box" id="simulation">
+      <h2>2. MÔ PHỎNG ẢNH HƯỞNG CỦA NƯỚC</h2>
+
+      <label for="waterType">Chọn loại nước:</label>
+      <select id="waterType">
+        <option value="clean">Nước sạch</option>
+        <option value="waste">Nước có rác thải</option>
+      </select>
+
+      <label for="pollution">
+        Nồng độ rác thải:
+        <span class="number" id="pollutionValue">0%</span>
+      </label>
+
+      <input id="pollution" type="range" min="0" max="100" value="0">
+
+      <div class="result">
+        <h3 id="resultTitle">Kết quả: Nước sạch</h3>
+
+        <b>Khả năng sống sót: <span id="lifeText">100%</span></b>
+        <div class="bar">
+          <div class="fill" id="lifeBar"></div>
+        </div>
+
+        <b>Hoạt động vận động: <span id="moveText">100%</span></b>
+        <div class="bar">
+          <div class="fill" id="moveBar"></div>
+        </div>
+
+        <b>Căng thẳng thần kinh: <span id="stressText">0%</span></b>
+        <div class="bar">
+          <div class="fill" id="stressBar"></div>
+        </div>
+
+        <p>
+          <b>Phản ứng mô phỏng:</b>
+          <span id="reaction">Hoạt động bình thường.</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="box" id="notes">
+      <h2>3. RESEARCH NOTES</h2>
+      <ul>
+        <li>Đây là mô hình máy tính dùng dữ liệu giả lập.</li>
+        <li>Thanh nồng độ chỉ minh họa mức rác thải trong nước.</li>
+        <li>Kết quả không thay thế thí nghiệm độc chất học thật.</li>
+        <li>Không dùng mô phỏng này để kết luận nước có độc hay an toàn.</li>
+      </ul>
+
+      <div class="warning">
+        WARNING: Mô phỏng giáo dục. Không tiến hành thí nghiệm với hóa chất
+        hoặc nước ô nhiễm thật nếu không có người hướng dẫn chuyên môn.
+      </div>
+    </section>
+
+    <footer>
+      <p>Visitors: 000042 | Best viewed in Netscape Navigator 4.0</p>
+      <p>Copyright © 1998 Fruit Fly Research Lab</p>
+    </footer>
+  </div>
+
+  <script>
+    const waterType = document.getElementById("waterType");
+    const pollution = document.getElementById("pollution");
+    const pollutionValue = document.getElementById("pollutionValue");
+
+    const resultTitle = document.getElementById("resultTitle");
+    const lifeText = document.getElementById("lifeText");
+    const moveText = document.getElementById("moveText");
+    const stressText = document.getElementById("stressText");
+    const reaction = document.getElementById("reaction");
+
+    const lifeBar = document.getElementById("lifeBar");
+    const moveBar = document.getElementById("moveBar");
+    const stressBar = document.getElementById("stressBar");
+
+    function updateSimulation() {
+      const type = waterType.value;
+      let level = Number(pollution.value);
+
+      if (type === "clean") {
+        level = 0;
+        pollution.value = 0;
+      }
+
+      let life = 100;
+      let move = 100;
+      let stress = 0;
+
+      if (type === "waste") {
+        life = Math.max(15, 100 - level * 0.75);
+        move = Math.max(10, 100 - level * 0.85);
+        stress = Math.min(100, level * 0.9);
+      }
+
+      life = Math.round(life);
+      move = Math.round(move);
+      stress = Math.round(stress);
+
+      pollutionValue.textContent = level + "%";
+      lifeText.textContent = life + "%";
+      moveText.textContent = move + "%";
+      stressText.textContent = stress + "%";
+
+      lifeBar.style.width = life + "%";
+      moveBar.style.width = move + "%";
+      stressBar.style.width = stress + "%";
+
+      if (type === "clean") {
+        resultTitle.textContent = "Kết quả: Nước sạch";
+        reaction.textContent = "Ruồi giấm hoạt động bình thường trong mô phỏng.";
+      } else if (level < 30) {
+        resultTitle.textContent = "Kết quả: Ô nhiễm nhẹ";
+        reaction.textContent = "Có thể xuất hiện ảnh hưởng nhẹ đến vận động.";
+      } else if (level < 70) {
+        resultTitle.textContent = "Kết quả: Ô nhiễm trung bình";
+        reaction.textContent = "Vận động giảm và căng thẳng thần kinh tăng.";
+      } else {
+        resultTitle.textContent = "Kết quả: Ô nhiễm cao";
+        reaction.textContent = "Ảnh hưởng mô phỏng mạnh, vận động giảm rõ rệt.";
+      }
+    }
+
+    function showPart(part) {
+      const text = {
+        head: "Head: phần đầu, chứa não, mắt kép và các cơ quan cảm giác.",
+        thorax: "Thorax: phần ngực, nơi gắn cánh và chân, giúp ruồi di chuyển.",
+        abdomen: "Abdomen: phần bụng, chứa nhiều cơ quan bên trong của ruồi.",
+        wing: "Wing: cánh, giúp ruồi bay và giữ thăng bằng.",
+        eye: "Compound eye: mắt kép gồm nhiều đơn vị nhỏ, giúp nhận biết ánh sáng và chuyển động."
+      };
+
+      document.getElementById("partInfo").textContent = text[part];
+    }
+
+    waterType.addEventListener("change", updateSimulation);
+    pollution.addEventListener("input", updateSimulation);
+
+    updateSimulation();
+  </script>
+</body>
+</html>
