@@ -1,102 +1,108 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mô phỏng não ruồi</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #dff6ff, #f5fff0);
-      color: #17324d;
+      background: linear-gradient(135deg, #dff7ff, #eefaf4);
+      color: #12314d;
     }
 
     .container {
       width: 90%;
-      max-width: 850px;
+      max-width: 900px;
       margin: 40px auto;
-      background: white;
-      padding: 30px;
+      background: rgba(255,255,255,0.95);
       border-radius: 18px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      padding: 28px 30px 20px;
     }
 
     h1 {
-      margin-top: 0;
-      color: #176b87;
+      margin: 0 0 12px;
       text-align: center;
+      color: #1565c0;
+      font-size: 2.2rem;
     }
 
-    .intro {
+    .subtitle {
+      margin: 0 0 20px;
       text-align: center;
+      color: #40607c;
       line-height: 1.6;
     }
 
     label {
       display: block;
-      margin-top: 24px;
-      margin-bottom: 8px;
       font-weight: bold;
+      margin-top: 18px;
+      margin-bottom: 8px;
     }
 
-    select,
-    input[type="range"] {
+    select, input[type="range"] {
       width: 100%;
     }
 
     select {
-      padding: 12px;
-      border: 1px solid #aaa;
-      border-radius: 8px;
-      font-size: 16px;
+      padding: 12px 14px;
+      border: 1px solid #9fb3c8;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: white;
     }
 
     input[type="range"] {
-      accent-color: #168aad;
+      accent-color: #1976d2;
+      height: 8px;
       cursor: pointer;
     }
 
     .value {
-      color: #168aad;
-      font-size: 22px;
+      display: inline-block;
+      margin-left: 8px;
+      color: #1976d2;
       font-weight: bold;
+      font-size: 1.2rem;
     }
 
     .result {
-      margin-top: 30px;
-      padding: 22px;
-      background: #f1fbff;
+      margin-top: 28px;
+      background: #f2fbff;
+      border-left: 6px solid #1976d2;
+      padding: 22px 20px;
       border-radius: 14px;
-      border-left: 6px solid #168aad;
     }
 
     .result h2 {
       margin-top: 0;
-      color: #176b87;
+      margin-bottom: 18px;
+      color: #0e5fa4;
     }
 
     .metric {
-      margin: 18px 0;
+      margin-bottom: 18px;
     }
 
-    .metric-title {
+    .metric-head {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 6px;
+      align-items: center;
       font-weight: bold;
+      margin-bottom: 7px;
+      color: #234a63;
     }
 
     .bar {
       width: 100%;
       height: 18px;
-      background: #dce5e8;
       border-radius: 20px;
+      background: #dfe9ef;
       overflow: hidden;
     }
 
@@ -104,82 +110,77 @@
       height: 100%;
       width: 0%;
       border-radius: 20px;
-      transition: width 0.3s ease;
+      transition: width 0.35s ease;
     }
 
-    #survivalBar {
-      background: #38a169;
-    }
-
-    #movementBar {
-      background: #3182ce;
-    }
-
-    #stressBar {
-      background: #e53e3e;
-    }
+    #survivalBar { background: #2eae66; }
+    #movementBar { background: #2b7de9; }
+    #stressBar { background: #e74b4b; }
 
     .reaction {
       margin-top: 20px;
-      padding: 15px;
-      background: #fff8db;
+      background: #fff8d9;
+      border-left: 5px solid #f0b429;
+      padding: 14px 16px;
       border-radius: 10px;
       line-height: 1.6;
+      color: #3d3d3d;
     }
 
     .warning {
-      margin-top: 25px;
-      padding: 14px;
+      margin-top: 22px;
+      padding: 12px 14px;
       background: #fff3cd;
-      border: 1px solid #ffda6a;
+      border: 1px solid #f3cf5a;
       border-radius: 10px;
-      font-size: 14px;
+      color: #624b00;
       line-height: 1.5;
+      font-size: 0.95rem;
     }
 
     footer {
       text-align: center;
-      margin-top: 25px;
-      color: #607d8b;
-      font-size: 13px;
+      margin-top: 20px;
+      color: #4c6980;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 94%;
+        padding: 20px 18px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
     }
   </style>
 </head>
-
 <body>
-  <main class="container">
+  <div class="container">
     <h1>🧠 Mô phỏng não ruồi</h1>
-
-    <p class="intro">
-      Mô phỏng này dùng các chỉ số giả lập để minh họa cách
-      chất lượng nước có thể ảnh hưởng đến hoạt động của ruồi giấm.
+    <p class="subtitle">
+      Mô phỏng giả lập để quan sát ảnh hưởng của nước có rác thải lên
+      hoạt động của ruồi giấm.
     </p>
 
     <label for="waterType">Chọn loại nước:</label>
-
     <select id="waterType">
       <option value="clean">Nước sạch</option>
       <option value="waste">Nước có rác thải</option>
     </select>
 
-    <label for="concentration">
+    <label for="pollution">
       Nồng độ rác thải:
-      <span id="concentrationValue" class="value">0%</span>
+      <span id="pollutionValue" class="value">0%</span>
     </label>
+    <input id="pollution" type="range" min="0" max="100" value="0" />
 
-    <input
-      id="concentration"
-      type="range"
-      min="0"
-      max="100"
-      value="0"
-    >
-
-    <section class="result">
+    <div class="result">
       <h2 id="resultTitle">Kết quả mô phỏng</h2>
 
       <div class="metric">
-        <div class="metric-title">
+        <div class="metric-head">
           <span>Khả năng sống sót</span>
           <span id="survivalText">100%</span>
         </div>
@@ -189,7 +190,7 @@
       </div>
 
       <div class="metric">
-        <div class="metric-title">
+        <div class="metric-head">
           <span>Hoạt động vận động</span>
           <span id="movementText">100%</span>
         </div>
@@ -199,7 +200,7 @@
       </div>
 
       <div class="metric">
-        <div class="metric-title">
+        <div class="metric-head">
           <span>Mức căng thẳng thần kinh</span>
           <span id="stressText">0%</span>
         </div>
@@ -208,82 +209,67 @@
         </div>
       </div>
 
-      <div class="reaction">
-        <strong>Phản ứng mô phỏng:</strong>
-        <span id="reactionText">
-          Điều kiện nước sạch, chưa ghi nhận ảnh hưởng đáng kể.
-        </span>
+      <div class="reaction" id="reactionText">
+        Điều kiện nước sạch, chưa có dấu hiệu bất thường rõ ràng.
       </div>
-    </section>
-
-    <div class="warning">
-      ⚠️ Đây chỉ là mô phỏng giáo dục bằng dữ liệu giả lập.
-      Kết quả không phải dữ liệu thí nghiệm thật và không thể dùng để kết luận
-      nước có độc hay không đối với người hoặc động vật.
     </div>
 
-    <footer>
-      Fruit Fly Brain Simulation
-    </footer>
-  </main>
+    <div class="warning">
+      ⚠️ Đây là mô phỏng giáo dục, không phải kết quả thí nghiệm thực tế.
+      Không dùng để kết luận độc tính với người hay động vật.
+    </div>
+
+    <footer>Fruit Fly Brain Simulation</footer>
+  </div>
 
   <script>
     const waterType = document.getElementById("waterType");
-    const concentration = document.getElementById("concentration");
-    const concentrationValue = document.getElementById("concentrationValue");
-
+    const pollution = document.getElementById("pollution");
+    const pollutionValue = document.getElementById("pollutionValue");
     const resultTitle = document.getElementById("resultTitle");
     const survivalText = document.getElementById("survivalText");
     const movementText = document.getElementById("movementText");
     const stressText = document.getElementById("stressText");
+    const reactionText = document.getElementById("reactionText");
 
     const survivalBar = document.getElementById("survivalBar");
     const movementBar = document.getElementById("movementBar");
     const stressBar = document.getElementById("stressBar");
-    const reactionText = document.getElementById("reactionText");
 
     function updateSimulation() {
       const type = waterType.value;
-      let level = Number(concentration.value);
+      let level = Number(pollution.value);
 
       if (type === "clean") {
         level = 0;
-        concentration.value = 0;
+        pollution.value = 0;
       }
 
-      concentrationValue.textContent = level + "%";
+      pollutionValue.textContent = level + "%";
 
-      let survival;
-      let movement;
-      let stress;
+      let survival, movement, stress;
 
       if (type === "clean") {
         survival = 100;
         movement = 100;
         stress = 0;
-
         resultTitle.textContent = "Kết quả: Nước sạch";
-        reactionText.textContent =
-          "Ruồi giấm hoạt động bình thường trong mô phỏng.";
+        reactionText.textContent = "Ruồi giấm trong mô phỏng hoạt động bình thường.";
       } else {
-        survival = Math.max(20, 100 - level * 0.7);
+        survival = Math.max(15, 100 - level * 0.75);
         movement = Math.max(10, 100 - level * 0.85);
-        stress = Math.min(100, level * 0.95);
+        stress = Math.min(100, level * 0.9);
 
         resultTitle.textContent = "Kết quả: Nước có rác thải";
 
-        if (level === 0) {
-          reactionText.textContent =
-            "Chưa có nồng độ rác thải đáng kể trong mô phỏng.";
-        } else if (level < 30) {
-          reactionText.textContent =
-            "Có thể xuất hiện ảnh hưởng nhẹ đến vận động và mức căng thẳng thần kinh.";
-        } else if (level < 70) {
-          reactionText.textContent =
-            "Mô phỏng cho thấy hoạt động vận động giảm và căng thẳng thần kinh tăng.";
+        if (level < 20) {
+          reactionText.textContent = "Ảnh hưởng nhẹ: hoạt động có thể giảm ít, vẫn ở mức chấp nhận được.";
+        } else if (level < 50) {
+          reactionText.textContent = "Ảnh hưởng trung bình: vận động giảm rõ rệt và mức căng thẳng thần kinh tăng.";
+        } else if (level < 80) {
+          reactionText.textContent = "Ảnh hưởng mạnh: khả năng sống sót và vận động suy giảm đáng kể.";
         } else {
-          reactionText.textContent =
-            "Mô phỏng cho thấy ảnh hưởng mạnh: vận động giảm rõ rệt và tỷ lệ sống giảm.";
+          reactionText.textContent = "Ảnh hưởng rất mạnh: mức độ stress cao, hoạt động thần kinh suy giảm nghiêm trọng.";
         }
       }
 
@@ -301,7 +287,7 @@
     }
 
     waterType.addEventListener("change", updateSimulation);
-    concentration.addEventListener("input", updateSimulation);
+    pollution.addEventListener("input", updateSimulation);
 
     updateSimulation();
   </script>
